@@ -13,10 +13,14 @@ module.exports = async function handler(req, res) {
     );
     return json(res, 200, { ok: true, lotteries: r.rows });
   } catch (e) {
-    // Avoid leaking details in production; useful for local debugging.
     const isProd = process.env.NODE_ENV === "production";
-    if (!isProd) console.error("lotteries error:", e);
-    return json(res, 500, { error: "server_error", ...(isProd ? {} : { detail: String(e?.message || e) }) });
+    const id = `lot_${Date.now().toString(36)}`;
+    console.error("lotteries error", { id, message: e?.message, stack: e?.stack });
+    return json(res, 500, {
+      error: "server_error",
+      id,
+      ...(isProd ? {} : { detail: String(e?.message || e) }),
+    });
   }
 };
 

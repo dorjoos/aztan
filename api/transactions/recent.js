@@ -49,8 +49,10 @@ module.exports = async function handler(req, res) {
     }));
 
     return json(res, 200, { ok: true, rows });
-  } catch {
-    return json(res, 500, { error: "server_error" });
+  } catch (e) {
+    const id = `recent_${Date.now().toString(36)}`;
+    console.error("transactions/recent error", { id, message: e?.message, stack: e?.stack });
+    return json(res, 500, { error: "server_error", id });
   }
 };
 
