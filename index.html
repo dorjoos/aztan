@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Машины Сугалаа</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <button class="icon-btn" id="menuBtn" aria-label="Menu">
+          <span class="icon">☰</span>
+        </button>
+        <div class="brand">
+          <div class="brand__title">Машины Сугалаа</div>
+          <div class="brand__subtitle">Сугалаанд оролцож, хожоорой</div>
+        </div>
+        <div class="topbar__right">
+        </div>
+      </div>
+    </header>
+
+    <main class="container page">
+      <div class="grid-2 grid-home">
+        <section class="card card--list">
+          <div class="card__header">
+            <div class="card__title">Сугалаанууд</div>
+            <div class="card__hint">Өнөөдөр нээлттэй</div>
+          </div>
+          <div class="card__body">
+            <div class="lottery-grid" id="lotteryGrid"></div>
+
+            <div style="height:14px"></div>
+
+            <div class="admin-card">
+              <div class="admin-card__title">Оролцогчдын гүйлгээ</div>
+              <div class="pad">
+                <div class="code-note" id="recentTxMsg">Уншиж байна...</div>
+                <div class="table-wrap" style="margin-top:12px">
+                  <table class="table" id="recentTxTable">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Огноо</th>
+                        <th>Дүн</th>
+                        <th>Утас</th>
+                        <th>Сугалаа</th>
+                        <th>Гүйлгээний утга</th>
+                      </tr>
+                    </thead>
+                    <tbody id="recentTxBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card card--panel" id="rightPanel">
+          <div class="card__header">
+            <div class="card__title" id="panelTitle">Утас</div>
+          </div>
+          <div class="card__body">
+            <div class="stack" id="panelContent"></div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="muted">© Машины Сугалаа — demo UI</div>
+        <div class="muted">Made to resemble your reference screenshot</div>
+      </div>
+    </footer>
+
+    <div class="drawer" id="drawer" aria-hidden="true">
+      <div class="drawer__backdrop" id="drawerBackdrop"></div>
+      <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Navigation">
+        <div class="drawer__header">
+          <div class="drawer__title">Цэс</div>
+          <button class="icon-btn" id="drawerClose" aria-label="Close menu">✕</button>
+        </div>
+        <div class="drawer__body">
+          <a class="drawer__link" href="./index.html">Нүүр</a>
+          <a class="drawer__link" href="./admin.html">Dashboard</a>
+          <a class="drawer__link" href="./admin.html#transactions">Гүйлгээний хуулга</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="./app.js"></script>
+    <script src="./recent-transactions.js"></script>
+  </body>
+</html>
+

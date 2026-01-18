@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eaf2ff"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="car" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4f6f9"/>
+      <stop offset="1" stop-color="#cfd6de"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#0f172a" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <g filter="url(#shadow)">
+    <g transform="translate(210 290)">
+      <path d="M106 186c22-44 64-76 128-94 104-30 292-36 460-16 62 8 106 28 132 60l44 54c12 14 28 23 45 26l56 10c24 4 42 25 42 50v28c0 22-18 40-40 40H68c-22 0-40-18-40-40v-20c0-27 20-50 46-54l64-10z" fill="url(#car)"/>
+      <path d="M226 96c70-16 274-20 392-6 52 6 88 20 112 44l24 25H176l50-63z" fill="#d1d8e0"/>
+      <rect x="208" y="118" width="248" height="60" rx="12" fill="#e7edf5"/>
+      <rect x="470" y="118" width="240" height="60" rx="12" fill="#e7edf5"/>
+      <rect x="724" y="118" width="166" height="60" rx="12" fill="#e7edf5"/>
+      <circle cx="270" cy="296" r="62" fill="#111827"/>
+      <circle cx="270" cy="296" r="34" fill="#9ca3af"/>
+      <circle cx="786" cy="296" r="62" fill="#111827"/>
+      <circle cx="786" cy="296" r="34" fill="#9ca3af"/>
+      <rect x="110" y="240" width="120" height="18" rx="9" fill="#94a3b8" opacity="0.55"/>
+      <rect x="820" y="214" width="86" height="18" rx="9" fill="#94a3b8" opacity="0.55"/>
+    </g>
+  </g>
+  <text x="80" y="90" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="800" fill="#0f172a" opacity="0.55">Land Cruiser 200 (placeholder)</text>
+</svg>
+

@@ -1,0 +1,23 @@
+{
+  "name": "sugalaa",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Sugalaa demo with Vercel serverless API + Postgres (Neon) + admin auth",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "seed": "node scripts/seed.js",
+    "build": "node -e \"console.log('No build step required (static + Vercel serverless).')\""
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie": "^0.6.0",
+    "jsonwebtoken": "^9.0.2",
+    "pg": "^8.13.0",
+    "zod": "^3.23.8"
+  }
+}
+

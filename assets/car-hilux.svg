@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff1f1"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+    <linearGradient id="car" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff5252"/>
+      <stop offset="1" stop-color="#b71c1c"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#0f172a" flood-opacity="0.20"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#bg)"/>
+  <rect x="86" y="78" width="1108" height="564" rx="22" fill="#ffffff" opacity="0.82"/>
+  <g filter="url(#shadow)">
+    <g transform="translate(210 270)">
+      <path d="M90 210c18-46 60-82 122-106 100-38 260-46 438-28 66 6 114 24 146 56l62 62c13 13 29 21 47 24l52 7c27 4 47 28 47 55v38c0 19-16 35-35 35H60c-19 0-35-16-35-35v-30c0-29 21-54 50-58l64-10z" fill="url(#car)"/>
+      <path d="M218 106c64-20 260-34 392-18 46 6 80 20 104 44l30 31H174l44-57z" fill="#ff8a80" opacity="0.65"/>
+      <rect x="198" y="130" width="240" height="62" rx="12" fill="#ffd1d1" opacity="0.85"/>
+      <rect x="460" y="130" width="240" height="62" rx="12" fill="#ffd1d1" opacity="0.85"/>
+      <rect x="720" y="130" width="170" height="62" rx="12" fill="#ffd1d1" opacity="0.85"/>
+      <circle cx="250" cy="302" r="64" fill="#111827"/>
+      <circle cx="250" cy="302" r="34" fill="#9ca3af"/>
+      <circle cx="770" cy="302" r="64" fill="#111827"/>
+      <circle cx="770" cy="302" r="34" fill="#9ca3af"/>
+      <rect x="92" y="254" width="116" height="20" rx="10" fill="#ffffff" opacity="0.4"/>
+      <rect x="800" y="226" width="94" height="18" rx="9" fill="#ffffff" opacity="0.35"/>
+    </g>
+  </g>
+  <text x="80" y="90" font-family="ui-sans-serif, system-ui" font-size="24" font-weight="800" fill="#0f172a" opacity="0.55">Toyota Hilux (placeholder)</text>
+</svg>
+

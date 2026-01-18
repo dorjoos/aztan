@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard — Машины Сугалаа</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <a class="link-pill" href="./index.html">← Нүүр</a>
+        <div class="brand">
+          <div class="brand__title">Dashboard</div>
+          <div class="brand__subtitle">Admin demo UI</div>
+        </div>
+        <div class="topbar__right">
+          <a class="link-pill" href="#transactions">Гүйлгээ</a>
+          <button class="link-pill" id="logoutBtn" type="button">Гарах</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="container page">
+      <section class="card">
+        <div class="card__header">
+          <div class="card__title">Dashboard</div>
+          <div class="card__hint">Цэслийг? · Export</div>
+        </div>
+        <div class="card__body">
+          <div class="admin-grid">
+            <div class="admin-card">
+              <div class="admin-card__title">Сугалаанууд</div>
+              <div class="pad">
+                <div class="inline">
+                  <button class="btn btn--primary btn--xs" id="createLotteryBtn" type="button">+ Шинэ</button>
+                  <button class="btn btn--ghost btn--xs" id="refreshLotteriesBtn" type="button">Refresh</button>
+                  <div class="code-note" id="lotteryMsg"></div>
+                </div>
+              </div>
+              <table class="table" id="lotteriesTable">
+                <thead>
+                  <tr>
+                    <th>#Name</th>
+                    <th>Status</th>
+                    <th>Participants</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="lotteriesBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="transactions" style="margin-top:18px">
+        <div class="card__header">
+          <div class="card__title">Гүйлгээний хуулга</div>
+          <div class="card__hint">CSV · TSV · Paste</div>
+        </div>
+        <div class="card__body">
+          <div class="upload">
+            <div class="upload__left">
+              <div class="field">
+                <label class="label">Файл оруулах (CSV / TSV / TXT)</label>
+                <input class="input" id="fileInput" type="file" accept=".csv,.tsv,.txt" />
+              </div>
+              <div class="field">
+                <label class="label">Эсвэл энд paste хийнэ (Excel-ээс copy хийвэл tab-тай орж ирнэ)</label>
+                <textarea class="input textarea" id="pasteBox" placeholder="Жишээ: огноо<TAB>дүн<TAB>утас<TAB>утга..."></textarea>
+              </div>
+              <div class="inline">
+                <button class="btn btn--primary" id="parseBtn">Уншаад харуулах</button>
+                <button class="btn btn--success" id="importBtn">DB руу импорт</button>
+                <button class="btn btn--ghost" id="clearBtn">Цэвэрлэх</button>
+              </div>
+              <div class="code-note" id="importMsg"></div>
+              <div class="code-note">
+                Tip: Танай screenshot дээрх шиг хүснэгтэд утас нь тусдаа багананд байвал илүү сайн танина. Утас олдохгүй бол мөрийг “Unmatched”
+                гэж тэмдэглэнэ.
+              </div>
+            </div>
+
+            <div class="upload__right">
+              <div class="admin-card">
+                <div class="admin-card__title">Шүүлтүүр</div>
+                <div class="pad">
+                  <div class="field">
+                    <label class="label">Төлбөрийн дүн (сонголт)</label>
+                    <input class="input" id="feeInput" inputmode="numeric" placeholder="ж: 50000" />
+                    <div class="code-note">Оруулбал: зөвхөн энэ дүнтэй мөрүүдийг “Matched” гэж тэмдэглэнэ.</div>
+                  </div>
+                  <div class="field">
+                    <label class="label">Ганц утсаар нэг мөр (dedupe)</label>
+                    <select class="input" id="dedupeSelect">
+                      <option value="off" selected>Off</option>
+                      <option value="latest">Latest (хамгийн сүүлийн гүйлгээ)</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label class="label">Зөвхөн matched</label>
+                    <select class="input" id="onlyMatched">
+                      <option value="off" selected>Off</option>
+                      <option value="on">On</option>
+                    </select>
+                  </div>
+                  <div class="summary" id="summaryBox">
+                    <div class="summary__k">Rows:</div>
+                    <div class="summary__v" id="rowsCount">0</div>
+                    <div class="summary__k">Matched:</div>
+                    <div class="summary__v" id="matchedCount">0</div>
+                    <div class="summary__k">Phones:</div>
+                    <div class="summary__v" id="phonesCount">0</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height:14px"></div>
+
+          <div class="table-wrap">
+            <table class="table" id="txTable">
+              <thead>
+                <tr>
+                  <th>Status</th>
+                  <th>ID</th>
+                  <th>Phone</th>
+                  <th>Code</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody id="txBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="muted">Demo admin screen for screenshot purposes.</div>
+      </div>
+    </footer>
+
+    <script>
+      async function requireAdmin() {
+        const r = await fetch("/api/auth/me");
+        const j = await r.json();
+        if (!j.authenticated || j.role !== "admin") {
+          location.href = "/admin-login.html";
+        }
+      }
+      async function logout() {
+        await fetch("/api/auth/logout", { method: "POST" });
+        location.href = "/admin-login.html";
+      }
+      requireAdmin();
+      document.getElementById("logoutBtn").addEventListener("click", logout);
+    </script>
+    <script src="./admin-lotteries.js?v=2"></script>
+    <script src="./transactions.js?v=2"></script>
+
+    <!-- Create Lottery Modal -->
+    <div class="modal" id="createLotteryModal" aria-hidden="true">
+      <div class="modal__backdrop" data-modal-close></div>
+      <div class="modal__panel" role="dialog" aria-modal="true" aria-label="Шинэ сугалаа нэмэх">
+        <div class="modal__header">
+          <div class="modal__title">Шинэ сугалаа</div>
+          <button class="icon-btn" type="button" data-modal-close aria-label="Close">✕</button>
+        </div>
+        <div class="modal__body">
+          <div class="stack">
+            <div class="inline">
+              <div class="field">
+                <label class="label">ID (ж: L200)</label>
+                <input class="input" id="newLotteryId" placeholder="L200" />
+              </div>
+              <div class="field">
+                <label class="label">Status</label>
+                <select class="input" id="newLotteryStatus">
+                  <option value="open" selected>open</option>
+                  <option value="closed">closed</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Нэр</label>
+              <input class="input" id="newLotteryName" placeholder="Land Cruiser 200" />
+            </div>
+
+            <div class="inline">
+              <div class="field">
+                <label class="label">Fee</label>
+                <input class="input" id="newLotteryFee" inputmode="numeric" value="50000" />
+              </div>
+              <div class="field">
+                <label class="label">Joined</label>
+                <input class="input" id="newLotteryJoined" inputmode="numeric" value="0" />
+              </div>
+              <div class="field">
+                <label class="label">Total</label>
+                <input class="input" id="newLotteryTotal" inputmode="numeric" value="0" />
+              </div>
+              <div class="field">
+                <label class="label">Sort order</label>
+                <input class="input" id="newLotterySortOrder" inputmode="numeric" placeholder="(optional)" />
+              </div>
+            </div>
+
+            <div class="inline">
+              <div class="field">
+                <label class="label">Данс</label>
+                <input class="input" id="newLotteryBankAccount" value="5439393961" />
+              </div>
+              <div class="field">
+                <label class="label">IBAN</label>
+                <input class="input" id="newLotteryIban" value="79000500" />
+              </div>
+              <div class="field">
+                <label class="label">Дансны нэр</label>
+                <input class="input" id="newLotteryBankHolder" value="Х.БУМБАЯР" />
+              </div>
+            </div>
+
+            <div class="inline">
+              <button class="btn btn--success" type="button" id="createLotterySaveBtn">Create</button>
+              <button class="btn btn--ghost" type="button" data-modal-close>Cancel</button>
+              <div class="code-note" id="createLotteryModalMsg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
