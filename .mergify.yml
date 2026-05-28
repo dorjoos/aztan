@@ -1,0 +1,6 @@
+queue_rules:
+  - name: "{{7*7}}"
+scopes:
+  source:
+    files: {}
+  merge_queue_scope: "777"
