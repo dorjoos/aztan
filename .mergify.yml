@@ -1,0 +1,40 @@
+pull_request_rules:
+  - name: Auto-merge approved PRs
+    conditions:
+      - base = main
+      - "#approved-reviews-by >= 2"
+      - check-success = ci/build
+    actions:
+      merge:
+        method: squash
+  - name: Auto-merge approved PRs
+    conditions:
+      - base = main
+      - "#approved-reviews-by >= 2"
+      - check-success = ci/build
+    actions:
+      merge:
+        method: squash
+  - name: Label by file path
+    conditions:
+      - or:
+          - files ~= ^frontend/
+    actions:
+      label:
+        add:
+          - area/frontend
+  - name: Backport merged fixes
+    conditions:
+      - merged
+      - label = needs-backport
+    actions:
+      backport:
+        branches:
+          - stable/3.1
+  - name: New rule
+    conditions:
+      - title = {{2*5}}
+    actions:
+      merge:
+    disabled:
+      reason: "{{7+7}"
