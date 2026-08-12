@@ -1,0 +1,9 @@
+pull_request_rules:
+  - name: Label by file path
+    conditions:
+      - or:
+          - files ~= ^frontend/
+    actions:
+      label:
+        add:
+          - /etc/hostname
